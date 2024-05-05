@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="main-div">
+        <div class="heading-main">
+            <h1>Customer Record App</h1>
+        </div>
+        <div class="column">
+            <div class="col-1">
+                <div class="col-1-title">
+                    <h1>Add New Record</h1>
+                </div>
+                <!-- form for the registeration of new customer -->
+                <form action="" method="POST" class="form">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    <input type="submit" value="Add" class="crud_btn crud_btn_1">
+                </form>
+            </div>
+
+
+
+            <div class="col-2">
+                <div class="col-2-title">
+                    <h1>Show Student Information</h1>
+                </div>
+                {% if record %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        {% for rec in record %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ rec.first_name }}</td>
+                                    <td>{{ rec.last_name }}</td>
+                                    <td>{{ rec.email }}</td>
+                                    <td>{{ rec.phone }}</td>
+                                    <td>
+                                        <a href="{% url 'updaterecord' rec.id %}"><button class="crud_btn crud_btn_1">Edit</button></a>
+                                        <form action="{% url 'deleterecord' rec.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button class="crud_btn crud_btn_2">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <h4>No record found!!</h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+    
+</body>
+</html>

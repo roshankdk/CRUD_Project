@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="main-div">
+        <div class="heading-main">
+            <h1>Customer Record App</h1>
+        </div>
+        <div class="column">
+            <div class="col-1">
+                <div class="col-1-title">
+                    <h1>Update Record</h1>
+                </div>
+                <!-- form for the update customer -->
+                <form action="" method="POST" class="form">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+                    <input type="submit" value="Update" class="crud_btn crud_btn_1">
+                </form>
+                <a href="{% url 'index' %}"><button class="crud_btn crud_btn_2">Back to home</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
